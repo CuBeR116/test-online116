@@ -13,13 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
   $arTest = $APPLICATION->getTest();
   $result = [];
-  $allQuestions = 0;
   $rights = 0;
+  $rightText = 'Верно';
+  $wrongText = 'Неверно';
   
   if ($_POST['question']) {
     foreach ($_POST['question'] as $key_question => $question) {
       $successResult = 0;
-      $allQuestions++;
       $questionRight = $APPLICATION->getCountAnswer($arTest['question'][$key_question]['answer']);
       
       $result[$key_question]['name'] = $arTest['question'][$key_question]['name'];
@@ -36,10 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
       
       if ($questionRight === $successResult) {
-        $result[$key_question]['result'] = 'success';
+        $result[$key_question]['result'] = $rightText;
         $rights++;
       } else {
-        $result[$key_question]['result'] = 'wrong';
+        $result[$key_question]['result'] = $wrongText;
         
       }
       
@@ -48,24 +48,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
   if ($_POST['radio']) {
     foreach ($_POST['radio'] as $key_radio => $radio) {
-      $allQuestions++;
       $result[$key_radio]['name'] = $arTest['question'][$key_radio]['name'];
       
       if ($arTest['question'][$key_radio]['answer'][$radio]['right']) {
         $result[$key_radio]['answer'][$radio] = 'true';
-        $result[$key_radio]['result'] = 'success';
+        $result[$key_radio]['result'] = $rightText;
         $rights++;
       } else {
         $result[$key_radio]['answer'][$radio] = 'false';
-        $result[$key_radio]['result'] = 'wrong';
+        $result[$key_radio]['result'] = $wrongText;
       }
     }
   }
   
   echo json_encode([
-    'message' => 'Правильных ответов - ' . $rights . ' из ' . $allQuestions,
-//    'message' => $questionRight . ', ' . $successResult,
-    'result'  => $result
+    'message' => 'Правильных ответов - ' . $rights . ' из ' . count($arTest['question']),
+    'result'  => $result,
+    'sum' => count($arTest['question'])
   ]);
 }
 ?>
