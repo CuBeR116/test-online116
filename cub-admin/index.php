@@ -115,6 +115,11 @@ class APPLICATION
     $this->prepareTitle();
     echo $this->content;
   }
+  
+  public function getMenu($name) {
+    require '.' . $name . '.menu.php';
+    return $menu;
+  }
 }
 
 function debug($array)

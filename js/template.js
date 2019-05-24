@@ -2,24 +2,28 @@ $(window).on('load', function () {
   create();
   answer();
   switchQuestion();
+  checkTarget();
 });
 
-function addQuestion(element) {
+function addQuestion() {
   numberQuestion++;
-  var question = $('<div>', {
+  let question = $('<div>', {
     id: 'question[' + numberQuestion + ']',
-    class: 'w-100',
-    html: $('<p>', {
+    class: 'w-100 question__creates',
+    html: $('<div>', {
+      class: 'mt-4',
       html: '<h3>Вопрос - №' + numberQuestion + '</h3>'
     }),
     append: [
       $('<label>', {
+        class: 'w-100',
         html: [
           '<p>Название вопроса - ' + numberQuestion + '</p>',
           $('<input>', {
             name: 'question[' + numberQuestion + '][name]',
+            class: 'question-name',
             type: 'text',
-            required: 'required'
+            required: 'required',
           })
         ],
       }),
@@ -28,6 +32,7 @@ function addQuestion(element) {
       }),
       $('<button>', {
         onclick: 'addAnswer($(this))',
+        class: 'addAnswer-button',
         type: 'button',
         html: 'Добавить вариант ответа',
       }),
@@ -42,7 +47,7 @@ function addQuestion(element) {
 function addAnswer(element) {
   console.log(element.html());
   let objAnswer = $('<div>', {
-    class: 'w-100',
+    class: 'mb-4 newQuestion-block',
     html: [
       $('<span>', {
         text: numberAnswer + ')'
@@ -51,14 +56,17 @@ function addAnswer(element) {
         placeholder: 'Вариант ответа',
         name: 'question[' + numberQuestion + '][answer][' + numberAnswer + '][value]',
         type: 'text',
-        required: 'required'
+        required: 'required',
+        class: 'correctAnswer',
       }),
       '<br />',
       $('<label>', {
+        class: 'correctAnswer-label',
         html: [
           $('<input>', {
             type: 'checkbox',
             value: 'true',
+            'data-check': '',
             name: 'question[' + numberQuestion + '][answer][' + numberAnswer + '][right]',
           }),
           'Верный вариант ответа',
@@ -67,9 +75,10 @@ function addAnswer(element) {
       $('<button>', {
         type: 'button',
         html: 'X',
+        class: 'removeButton',
         onclick: 'remove($(this))'
       }),
-      '<br />'
+      '<hr />',
     ]
   });
   element.before(objAnswer);
@@ -123,7 +132,10 @@ function answer() {
         });
         $('[data-progress-processing]').text(data.sum);
 
-        $this.slideUp();
+        $this.slideUp(function () {
+          $this.remove();
+        });
+
         let result = $('[data-result]');
         result.html($('<div>', {
           html: [
@@ -206,6 +218,12 @@ function switchQuestion() {
 
 function labelTarget() {
   $('[data-answer]').on('change', 'input', function (e) {
+    $(this).closest('label').toggleClass('checked');
+  });
+}
+
+function checkTarget() {
+  $('body').on('change', '[data-check]', function (e) {
     $(this).closest('label').toggleClass('checked');
   });
 }

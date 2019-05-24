@@ -8,22 +8,31 @@ $APPLICATION->setTitle('Создать тест');
   <h1>Создание теста</h1>
 
   <form data-create>
-    <label for="testName">
-      Введите название теста
-      <input type="text"
-             name="name"
-             id="testName">
-    </label>
+
+    <div class="question-create__head">
+      <label for="testName">
+        Введите название теста
+        <input type="text"
+               name="name"
+               id="testName">
+      </label>
 
 
-    <input type="submit"
-           value="Создать">
+      <div>
+        <input type="submit"
+               class="question-create__input"
+               value="Создать">
+      </div>
+    </div>
+    <hr/>
   </form>
 
+
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 mt-4">
       <button type="button"
-              onclick="addQuestion($(this))">Добавить вопрос
+              class="addQuestion"
+              onclick="addQuestion()">Добавить вопрос
       </button>
     </div>
   </div>
