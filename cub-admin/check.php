@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   require_once __DIR__ . '/index.php';
   $APPLICATION = new APPLICATION();
   
-  $arTest = $APPLICATION->getTest();
+  $arTest = $APPLICATION->getTest($_POST['test']);
   $result = [];
   $rights = 0;
   $rightText = 'Верно';

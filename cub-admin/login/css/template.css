@@ -1,0 +1,58 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.loginForm input {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: .3em;
+  background: #fff;
+  position: relative;
+  transition: background-color .3s;
+  outline: none;
+  margin-left: 1em;
+}
+
+.loginForm label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginForm {
+  padding: 1em;
+}
+
+.loginForm input[type="submit"] {
+  padding: .3em 2em;
+  cursor: pointer;
+}
+
+.loginForm input:hover {
+  background-color: #ffecec;
+}
+
+.login-bg {
+  background: url('/img/bg-01.jpg') no-repeat 50%;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+.login-block {
+  padding: 3em;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 14px;
+}
+
+.loginResult-block {
+  margin-top: 2em;
+}
+
+.error {
+  color: #ff1c04;
+}

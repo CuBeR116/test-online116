@@ -43,17 +43,19 @@ class APPLICATION
     }
   }
   
-  public function showHead()
+  public function echoIncludedCSS()
   {
     foreach ($this->cssFiles as $css) {
       echo '<link rel="stylesheet" href="' . $css . '">';
     }
   }
   
-  public function showFooter()
+  public function echoIncludedJS()
   {
-    foreach ($this->jsFiles as $js) {
-      echo '<script src="' . $js . '"></script>';
+    if (is_array($this->jsFiles)) {
+      foreach ($this->jsFiles as $js) {
+        echo '<script src="' . $js . '"></script>';
+      }
     }
   }
   
@@ -67,9 +69,39 @@ class APPLICATION
     $this->title = $strTitle;
   }
   
-  public function getTest()
+  public function getTestsList() {
+    $arFiles = [];
+    foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/cub-admin/questions/*.txt") as $file) {
+      $testContent = json_decode(file_get_contents($file), true);
+      $fileInfo = pathinfo($file);
+      $arFiles[] = [
+        'path' => $file,
+        'content' => $testContent,
+        'testName' => $testContent['name'],
+        'testFileName' => $fileInfo['filename'],
+      ];
+    }
+    
+    return $arFiles;
+  }
+  
+  public function checkTestExist($name) {
+    if(file_exists(__DIR__ . '/questions/' . $name . '.txt')) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  
+  public function getTest($name)
   {
-    return json_decode(file_get_contents(__DIR__ . '/questions/file.txt'), true);
+    if(file_exists(__DIR__ . '/questions/' . $name . '.txt')) {
+      return json_decode(file_get_contents(__DIR__ . '/questions/' . $name . '.txt'), true);
+    }
+    else {
+      return false;
+    }
   }
   
   function getTypeAnswer($haystackAr)
@@ -107,18 +139,29 @@ class APPLICATION
     return $count;
   }
   
-  public function prepareTitle() {
-    $this->content = (preg_replace('|(<title>).+(</title>)|isU', "$1". $this->getTitle() ."$2", $this->content));
+  public function prepareTitle()
+  {
+    $this->content = (preg_replace('|(<title>).+(</title>)|isU', "$1" . $this->getTitle() . "$2", $this->content));
   }
   
-  public function showContent() {
+  public function showContent()
+  {
     $this->prepareTitle();
     echo $this->content;
   }
   
-  public function getMenu($name) {
-    require '.' . $name . '.menu.php';
+  public function getMenu($name)
+  {
+    require $_SERVER['DOCUMENT_ROOT'] . '/.' . $name . '.menu.php';
     return $menu;
+  }
+  
+  public function includeAdminTemplate($file)
+  {
+    if (require ($_SERVER['DOCUMENT_ROOT'] . '/cub-admin/template' . $file))
+      return true;
+    else
+      return false;
   }
 }
 

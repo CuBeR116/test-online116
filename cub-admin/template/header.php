@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: CuBeR116
- * Date: 02.05.2019
- * Time: 16:31
+ * Date: 01.06.2019
+ * Time: 13:28
  * Mail: cuber116@gmail.com
  */
 
@@ -18,15 +18,12 @@ $admin = new logIn();
 global $APPLICATION;
 $APPLICATION = new APPLICATION();
 
-$APPLICATION->include_css('/css/bootstrap.min.css');
-$APPLICATION->include_css('/css/template.css');
 
-$APPLICATION->include_js('/js/jquery-3.2.1.min.js');
-$APPLICATION->include_js('/js/template.js');
+$APPLICATION->include_css('/cub-admin/login/css/bootstrap.min.css');
+$APPLICATION->include_css('/cub-admin/login/css/template.css');
 
-if($check = $admin->checkAuthorization())
-  $APPLICATION->include_js('/cub-admin/login/js/template.js');
-
+$APPLICATION->include_js('/cub-admin/login/js/jquery-3.2.1.min.js');
+$APPLICATION->include_js('/cub-admin/login/js/template.js');
 ?>
 <!doctype html>
 <html lang="ru">
@@ -38,6 +35,6 @@ if($check = $admin->checkAuthorization())
         content="ie=edge">
   <title><?= $APPLICATION->getTitle(); ?></title>
   <?php $APPLICATION->echoIncludedCSS() ?>
-  
+
 </head>
 <body>

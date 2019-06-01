@@ -18,10 +18,13 @@
         </ul>
       </div>
     </div>
+    <div class="container">
+      <?php $APPLICATION->file_include('/authorization.php'); ?>
+    </div>
   </footer>
 
 <?php
-$APPLICATION->showFooter();
+$APPLICATION->echoIncludedJS();
 ?>
   </body>
   </html>

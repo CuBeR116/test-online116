@@ -1,3 +1,7 @@
+footer {
+  padding: 2em 0;
+}
+
 .question-block {
   display: none;
 }
@@ -291,7 +295,7 @@
 .removeButton {
   position: absolute;
   right:  0;
-  top: 0;
+  top: 12px;
   background:  #fff;
   border: 1px solid #000;
   border-radius: 5px;
@@ -341,4 +345,121 @@
 
 .addAnswer-button:hover {
   background-color: #ffecec;
+}
+
+.lk__authorization-text {
+  text-align: right;
+}
+
+.lk__authorization-link {
+  color: #000;
+  font-weight: 600;
+  padding: .5em 1em;
+  background: #fcf7f7;
+}
+
+.lk__authorization-link:hover {
+  color: #000;
+}
+
+.lk {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.lk__name-text {
+  margin: 0 1em 0 0;
+  border-bottom: 1px solid #acacac;
+}
+
+.lk__out-link {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 0.3em 3em .3em 1em;
+  background: url(/img/logout.png) 94% 46% no-repeat #fff;
+  position: relative;
+  cursor: pointer;
+  transition: background-color .3s, background-position .2s;
+  outline: none;
+  background-size: 20%;
+  color: #000;
+  display: block;
+}
+
+.lk__out-link:hover {
+  color: #000;
+  background-color: #ffecec;
+  text-decoration: none;
+}
+
+.testsListBack-text {
+  margin: 0;
+}
+
+.testsListBack-link {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 0.3em 3em .3em 1em;
+  background: url(/img/return-back.png) 96% 43% no-repeat #fff;
+  position: relative;
+  cursor: pointer;
+  transition: background-color .3s, background-position .2s;
+  outline: none;
+  background-size: 10%;
+  color: #000;
+  display: block;
+}
+
+.testsListBack-block {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.testsListBack-link:hover {
+  color: #000;
+  background-color: #ffecec;
+  text-decoration: none;
+}
+
+.testsList-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.testsList__item-text {
+  margin: 0;
+  position: relative;
+  width: 20%;
+}
+
+.testsList__item-link {
+  color: #000;
+  margin: .3em 0;
+  border: 1px solid #000;
+  padding: 0.5em 1em;
+  text-align: center;
+  display: block;
+  width: 88%;
+}
+
+.testsList__item-link:hover {
+  color: #000;
+}
+
+.createNewTest {
+  color: #000;
+  font-weight: 600;
+  padding: .5em 1em;
+  background: #fcf7f7;
+}
+
+.createNewTest:hover {
+  color: #000;
+}
+
+.testsList__item-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
